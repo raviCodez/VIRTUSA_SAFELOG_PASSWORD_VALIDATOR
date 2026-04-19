@@ -32,18 +32,7 @@ The SafeLog Password Validator is a Core Java application developed to enforce s
 
 ## Sample Output
 
-Enter password: hello
-Too short
-Try again
-
-Enter password: helloworld
-Missing an uppercase letter
-Missing a digit
-Try again
-
-Enter password: Hello123
-Password is valid
-
+![Sample Output](screenshots/Output.png)
 ## How to Run
 
 1. Compile the program:
