@@ -1,63 +1,73 @@
-import java.util.Scanner;
+import java.util.*;
 
 public class PasswordValidator {
 
-    // Method to validate password based on given policy
-    public static boolean validatePassword(String password) {
+    static boolean hasUpperCaseBoolean;
+    static boolean hasDigitBoolean;
 
-        boolean hasUppercase = false;
-        boolean hasDigit = false;
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
 
-        // Check length
-        if (password.length() < 8) {
+    while(true){
+    System.out.println("Enter the password :");
+    String password = sc.nextLine();
+
+    if(isValidPassword(password)){
+        System.out.println("Password is valid");
+        break;
+    } else {
+        if(password.length() < 8){
             System.out.println("Too short");
+        }
+        if(!hasUpperCaseBoolean){
+            System.out.println("Password must contain at least one uppercase letter");
+        }
+        if(!hasDigitBoolean){
+            System.out.println("Password must contain at least one digit");
+        }
+    }
+}
+    }
+
+    public static boolean isValidPassword(String password){
+        hasUpperCaseBoolean= hasUpperCase(password);
+        hasDigitBoolean=hasDigit(password);
+
+        
+        if(password.length()<8){
             return false;
         }
 
-        // Loop through each character
-        for (int i = 0; i < password.length(); i++) {
-            char ch = password.charAt(i);
+        
 
-            if (Character.isUpperCase(ch)) {
-                hasUppercase = true;
-            }
 
-            if (Character.isDigit(ch)) {
-                hasDigit = true;
-            }
-        }
+        return hasUpperCaseBoolean && hasDigitBoolean;
 
-        // Feedback messages
-        if (!hasUppercase) {
-            System.out.println("Missing an uppercase letter");
-        }
-
-        if (!hasDigit) {
-            System.out.println("Missing a digit");
-        }
-
-        // Final validation
-        return hasUppercase && hasDigit;
     }
 
-    public static void main(String[] args) {
-
-        Scanner scanner = new Scanner(System.in);
-        String password;
-
-        // Retry mechanism using while loop
-        while (true) {
-            System.out.print("Enter password: ");
-            password = scanner.nextLine();
-
-            if (validatePassword(password)) {
-                System.out.println("Password is valid");
-                break;
-            } else {
-                System.out.println("Try again");
+    public static boolean hasUpperCase(String password){
+        for(int i=0;i<password.length();i++){
+            if(isUpperCase(password.charAt(i))){
+                return true;
             }
         }
+        return false;
+    }
 
-        scanner.close();
+    public static boolean isUpperCase(char ch){
+        return ch>='A' && ch<='Z';
+    }
+
+    public static boolean hasDigit(String password){
+        for(int i=0;i<password.length();i++){
+            if(isDigit(password.charAt(i))){
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public static boolean isDigit(char ch){
+        return ch>='0' && ch<='9';
     }
 }
